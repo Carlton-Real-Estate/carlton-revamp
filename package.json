@@ -4,7 +4,8 @@
   "description": "Carlton Real Estate Property Listings",
   "main": "index.js",
   "scripts": {
-    "start": "node backend/index.js"
+    "start": "node backend/index.js",
+    "build": "rm -rf dist && cp -R public dist && echo 'Built -> dist/'"
   },
   "keywords": [
     "real-estate",

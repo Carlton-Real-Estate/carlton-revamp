@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Details - Carlton Real Estate</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/property-details.css">
+</head>
+<body>
+    <!-- Property Details Modal -->
+    <div id="propertyModal" class="property-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-content">
+                <!-- Close Button -->
+                <button class="modal-close" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+                
+                <!-- Property Details Grid -->
+                <div class="property-details-grid">
+                    <!-- Left Side: Main Photo & Info -->
+                        <div class="details-right">
+                            <div class="property-hero">
+                            <div class="property-hero-image" id="propertyHeroImage">
+                            </div>                            <div class="property-info-card">
+                                <div class="info-row">
+                                    <h1 id="propertyTitle">Luxury 2BR Apartment</h1>
+                                    <span class="price" id="propertyPrice">85,000 BHD</span>
+                                </div>
+                                <div class="info-row">
+                                    <div class="location">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span id="propertyLocation">Juffair</span>
+                                    </div>
+                                    <span class="property-type" id="propertyType">For Sale</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="property-ref" id="propertyRef">Ref: AJ45123</span>
+                                </div>
+                                
+                                <!-- Share Button -->
+                                <button class="share-btn" id="shareBtn">
+                                    <i class="fas fa-share-alt"></i>
+                                    Share
+                                </button>
+                            </div>
+                            
+                            <!-- Agent Card -->
+                            <div class="agent-card">
+                                <div class="agent-photo" id="agentPhoto"></div>
+                                <div class="agent-info">
+                                    <div class="agent-header">
+                                        <h3 id="agentName">Ahmed Al-Mahmood</h3>
+                                        <p class="agent-title">Property Consultant</p>
+                                    </div>
+                                    <div class="agent-buttons">
+                                        <a href="#" class="agent-btn call-btn" id="agentCallBtn">
+                                            <i class="fas fa-phone"></i>
+                                            Call
+                                        </a>
+                                        <a href="#" class="agent-btn whatsapp-btn" id="agentWhatsappBtn">
+                                            <i class="fab fa-whatsapp"></i>
+                                            WhatsApp
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Property Details Card -->
+                            <div class="property-details-card">
+                                <div class="details-grid" id="propertyDetailsGrid">
+                                    <div class="detail-item">
+                                        <span class="detail-value" id="propertyId">4578</span>
+                                        <span class="detail-label">ID</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-value" id="propertyFor">Rent</span>
+                                        <span class="detail-label">Property For</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-value" id="propertySizeSqf">5,166.7</span>
+                                        <span class="detail-label">Size S.Q.F</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-value" id="propertySizeSqm">480</span>
+                                        <span class="detail-label">Size S.Q.M</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-value" id="propertyFloors">2</span>
+                                        <span class="detail-label">No. of Floors</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-value" id="propertyRooms">5</span>
+                                        <span class="detail-label">No. Rooms</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-value" id="propertyBaths">7</span>
+                                        <span class="detail-label">No. Baths</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-value" id="propertyKitchens">1</span>
+                                        <span class="detail-label">No. of Kitchens</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-value" id="propertyHalls">2</span>
+                                        <span class="detail-label">No. of Halls</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-value" id="propertyFurnished">Furnished</span>
+                                        <span class="detail-label">Status</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Side: Description & Facilities -->
+                    <div class="details-left">
+                        <section class="property-section">
+                            <h2>Description</h2>
+                            <p class="property-description" id="propertyDescription">
+                                We don't just rent apartments. From the moment you walk through the front door you'll feel the comfort and security that makes our residents happy to call us the best.
+                            </p>
+                        </section>
+                        
+                        <section class="property-section">
+                            <h2>Facilities & Amenities</h2>
+                            <div class="facilities-list" id="facilitiesList">
+                                <!-- Facilities will be loaded here -->
+                            </div>
+                        </section>
+                        
+                        <section class="property-section">
+                            <h2>Gallery</h2>
+                            <div class="property-gallery" id="propertyGallery">
+                                <!-- Gallery items will be loaded here -->
+                            </div>
+                        </section>
+                        
+                        <section class="property-section similar-section">
+                            <h2>Similar Properties</h2>
+                            <div class="similar-properties-grid" id="similarPropertiesGrid">
+                                <!-- Similar properties will be loaded here -->
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Popup Modal -->
+    <div class="share-popup" id="sharePopup">
+        <div class="share-popup-overlay"></div>
+        <div class="share-popup-content">
+            <button class="share-popup-close" id="sharePopupClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3>Share Property</h3>
+            <div class="share-options">
+                <button class="share-option" id="printProperty">
+                    <i class="fas fa-print"></i>
+                    <span>Print</span>
+                </button>
+                <button class="share-option" id="shareWhatsapp">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>WhatsApp</span>
+                </button>
+                <button class="share-option" id="copyLink">
+                    <i class="fas fa-link"></i>
+                    <span>Copy Link</span>
+                </button>
+                <button class="share-option" id="exportPdf">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>Export PDF</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/property-details.js"></script>
+</body>
+</html>
