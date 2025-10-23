@@ -1,0 +1,116 @@
+{
+  "displayName": "Carlton Bahrain Map Style",
+  "variant": "light",
+  "backgroundColor": "#d6d6d6",
+  "mapSettings": {
+    "center": {
+      "lat": 26.0667,
+      "lng": 50.5577
+    },
+    "zoom": 10.5,
+    "minZoom": 9.5,
+    "maxZoom": 15,
+    "restriction": {
+      "latLngBounds": {
+        "north": 26.325,
+        "south": 25.79,
+        "west": 50.35,
+        "east": 50.75
+      },
+      "strictBounds": true
+    },
+    "mapTypeControl": true,
+    "streetViewControl": false,
+    "zoomControl": true,
+    "fullscreenControl": true
+  },
+  "styles": [
+    {
+      "id": "infrastructure",
+      "geometry": {
+        "visible": true
+      }
+    },
+    {
+      "id": "infrastructure.businessCorridor",
+      "geometry": {
+        "visible": false
+      }
+    },
+    {
+      "id": "pointOfInterest",
+      "geometry": {
+        "visible": true
+      },
+      "label": {
+        "visible": true,
+        "pinFillColor": "#0a2b4a",
+        "textFillOpacity": 1,
+        "textFillColor": "#000000"
+      }
+    },
+    {
+      "id": "pointOfInterest.emergency.hospital",
+      "label": {
+        "pinFillColor": "#ff2600"
+      }
+    },
+    {
+      "id": "pointOfInterest.entertainment.themePark",
+      "label": {
+        "visible": false
+      }
+    },
+    {
+      "id": "pointOfInterest.foodAndDrink.restaurant",
+      "label": {
+        "visible": false
+      }
+    },
+    {
+      "id": "pointOfInterest.other.cemetery",
+      "geometry": {
+        "visible": false
+      },
+      "label": {
+        "visible": false
+      }
+    },
+    {
+      "id": "pointOfInterest.other.placeOfWorship",
+      "label": {
+        "visible": false
+      }
+    },
+    {
+      "id": "pointOfInterest.other.school",
+      "label": {
+        "visible": true,
+        "pinFillColor": "#c0c0c0"
+      }
+    },
+    {
+      "id": "pointOfInterest.retail.shopping",
+      "label": {
+        "visible": true
+      }
+    },
+    {
+      "id": "political",
+      "geometry": {
+        "visible": true,
+        "fillColor": "#929292"
+      },
+      "label": {
+        "visible": true,
+        "pinFillColor": "#000000"
+      }
+    },
+    {
+      "id": "political.countryOrRegion",
+      "label": {
+        "visible": false
+      }
+    }
+  ]
+}

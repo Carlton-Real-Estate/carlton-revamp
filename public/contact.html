@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Carlton Real Estate</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    
+    <style>
+        .contact-hero {
+            background: var(--gradient-hero);
+            padding: 4rem 0 3rem;
+            text-align: center;
+            color: white;
+        }
+        
+        .contact-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .offices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 3rem 0;
+        }
+        
+        .office-card {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .office-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-2xl);
+        }
+        
+        .office-map {
+            width: 100%;
+            height: 250px;
+            position: relative;
+        }
+        
+        .office-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .office-info {
+            padding: 1.5rem;
+        }
+        
+        .office-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--carlton-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .office-detail {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-text);
+        }
+        
+        .office-detail i {
+            color: var(--carlton-primary);
+            margin-top: 3px;
+            font-size: 1.1rem;
+        }
+        
+        .office-contact-btns {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .office-contact-btn {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border-radius: var(--border-radius);
+            border: none;
+            background: var(--carlton-primary) !important;
+            color: white !important;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .office-contact-btn:hover {
+            transform: scale(1.05);
+            background: var(--carlton-primary-light) !important;
+        }
+        
+        .office-contact-btn i {
+            font-size: 1rem;
+        }
+        
+        .social-contact-section {
+            background: #f8f9fa;
+            padding: 3rem 0;
+            margin: 3rem 0 0;
+        }
+        
+        .social-contact-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--carlton-primary);
+            margin-bottom: 2rem;
+        }
+        
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .social-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .social-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .social-card i {
+            font-size: 2.5rem;
+            color: var(--carlton-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .social-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .social-card a {
+            color: var(--secondary-text);
+            text-decoration: none;
+            word-break: break-all;
+        }
+        
+        @media (max-width: 768px) {
+            .office-contact-btns {
+                flex-direction: column;
+            }
+            
+            .social-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header class="carlton-header">
+        <nav class="carlton-navbar">
+            <div class="navbar-container">
+                <!-- Carlton Logo -->
+                <div class="navbar-brand">
+                    <a href="https://icarlton.com">
+                        <img src="https://listings.icarlton.com/uploads/enhanced_header_footer_files/header_logo.png" alt="Carlton Real Estate" class="logo">
+                    </a>
+                </div>
+                
+                <!-- Mobile Hamburger Button -->
+                <button class="navbar-hamburger" id="navbar-hamburger" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <!-- Navigation Menu -->
+                <div class="navbar-menu" id="navbar-menu">
+                    <a href="https://icarlton.com" class="nav-item">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    <a href="index.html" class="nav-item">
+                        <i class="fas fa-search"></i>
+                        <span>Search</span>
+                    </a>
+                    <a href="properties.html" class="nav-item">
+                        <i class="fas fa-th-large"></i>
+                        <span>Properties</span>
+                    </a>
+                    <a href="team.html" class="nav-item">
+                        <i class="fas fa-users"></i>
+                        <span>Team</span>
+                    </a>
+                    <a href="contact.html" class="nav-item active">
+                        <i class="fas fa-envelope"></i>
+                        <span>Contact</span>
+                    </a>
+                </div>
+                
+                <!-- Actions -->
+                <div class="navbar-actions">
+                    <button class="language-btn">
+                        <i class="fas fa-globe"></i>
+                        <span>EN</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <a href="login.html" class="login-btn">
+                        <i class="fas fa-user"></i>
+                        <span>Login</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Contact Hero -->
+    <section class="contact-hero">
+        <div class="container">
+            <h1>Get in Touch</h1>
+            <p>Visit us at any of our locations across Bahrain</p>
+        </div>
+    </section>
+
+    <!-- Office Locations -->
+    <main class="main-content">
+        <div class="container">
+            <div class="offices-grid">
+                <!-- Seef District Branch -->
+                <div class="office-card">
+                    <div class="office-map">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.7665!2d50.5330!3d26.2336!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDE0JzAxLjAiTiA1MMKwMzEnNTguOCJF!5e0!3m2!1sen!2sbh!4v1620000000000!5m2!1sen!2sbh"
+                            loading="lazy"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="office-info">
+                        <h3 class="office-title">Seef District Branch</h3>
+                        <div class="office-detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Office 141 (14th floor), Blgd. 1012 (West Point Tower), Road 3621, Al-Seef District 436</span>
+                        </div>
+                        <div class="office-detail">
+                            <i class="fas fa-phone"></i>
+                            <span>+973 1729 2827</span>
+                        </div>
+                        <div class="office-detail">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@icarlton.com</span>
+                        </div>
+                        <div class="office-detail">
+                            <i class="fas fa-clock"></i>
+                            <span>Sunday – Thursday: 8:00 AM - 4:00 PM<br>Friday – Saturday: Closed</span>
+                        </div>
+                        <div class="office-contact-btns">
+                            <a href="tel:+97317292827" class="office-contact-btn">
+                                <i class="fas fa-phone"></i> Call
+                            </a>
+                            <a href="mailto:info@icarlton.com" class="office-contact-btn">
+                                <i class="fas fa-envelope"></i> Email
+                            </a>
+                            <a href="https://maps.app.goo.gl/CeJ7HxG4fKNtmswd7" target="_blank" class="office-contact-btn">
+                                <i class="fas fa-map-marker-alt"></i> Directions
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Social Contact Section -->
+        <section class="social-contact-section">
+            <div class="container">
+                <h2 class="social-contact-title">Connect With Us</h2>
+                <div class="social-grid">
+                    <div class="social-card">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Email</h3>
+                        <a href="mailto:info@icarlton.com">info@icarlton.com</a>
+                    </div>
+                    
+                    <div class="social-card">
+                        <i class="fab fa-instagram"></i>
+                        <h3>Instagram</h3>
+                        <a href="https://www.instagram.com/carltonbahrain/" target="_blank">@carltonbahrain</a>
+                    </div>
+                    
+                    <div class="social-card">
+                        <i class="fab fa-linkedin"></i>
+                        <h3>LinkedIn</h3>
+                        <a href="https://www.linkedin.com/company/icarltonbahrain/" target="_blank">Carlton Bahrain</a>
+                    </div>
+                    
+                    <div class="social-card">
+                        <i class="fab fa-whatsapp"></i>
+                        <h3>WhatsApp</h3>
+                        <a href="https://wa.me/97317292827" target="_blank">+973 1729 2827</a>
+                    </div>
+                    
+                    <div class="social-card">
+                        <i class="fas fa-phone"></i>
+                        <h3>Phone</h3>
+                        <a href="tel:+97317292827">+973 1729 2827</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Carlton Footer -->
+    <footer class="carlton-footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <div class="footer-logo">
+                        <img src="https://listings.icarlton.com/uploads/enhanced_header_footer_files/da32d6eb1043a2de433746961b49d405.png" alt="Carlton Real Estate">
+                    </div>
+                    <div class="footer-copyright">
+                        <i class="far fa-copyright"></i>
+                        <span>2025 Copyright Carlton Real Estate.</span>
+                    </div>
+                </div>
+                
+                <div class="footer-right">
+                    <div class="social-links">
+                        <a href="https://icarlton.com/" target="_blank" class="social-link"><i class="fas fa-globe"></i></a>
+                        <a href="tel:+97317292827" class="social-link"><i class="fas fa-phone"></i></a>
+                        <a href="https://wa.me/97317292827" target="_blank" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        <a href="mailto:info@icarlton.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                        <a href="https://www.facebook.com/CarltonBahrain" target="_blank" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/carltonbahrain/" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="https://twitter.com/CarltonBahrain" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.youtube.com/channel/UChbYG6P05gcSTN8ZABF0sAQ" target="_blank" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.linkedin.com/company/icarltonbahrain/" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://maps.app.goo.gl/CeJ7HxG4fKNtmswd7" target="_blank" class="social-link"><i class="fas fa-location-dot"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+</body>
+</html>

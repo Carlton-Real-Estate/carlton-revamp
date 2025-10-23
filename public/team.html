@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team - Carlton Real Estate</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    
+    <style>
+        .team-hero {
+            background: var(--gradient-hero);
+            padding: 4rem 0 3rem;
+            text-align: center;
+            color: white;
+        }
+        
+        .team-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .team-hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 3rem 0;
+        }
+        
+        .team-member {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .team-member:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-2xl);
+        }
+        
+        .team-member-image {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+        }
+        
+        .team-member-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .team-member-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--carlton-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .team-member-role {
+            color: var(--secondary-text);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+        
+        .team-member-contact {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .team-member-contact .contact-btn {
+            padding: 0.75rem 1.25rem;
+            border-radius: var(--border-radius);
+            border: none;
+            background: var(--carlton-primary) !important;
+            color: white !important;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            width: auto;
+            height: auto;
+        }
+        
+        .team-member-contact .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            background: var(--carlton-primary-light) !important;
+        }
+        
+        .team-member-contact .contact-btn i {
+            font-size: 1rem;
+        }
+        
+        .team-member-contact .contact-btn span {
+            display: inline;
+        }
+        
+        @media (max-width: 768px) {
+            .team-member-contact {
+                gap: 0.75rem;
+            }
+            
+            .team-member-contact .contact-btn {
+                padding: 0.75rem;
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+                justify-content: center;
+            }
+            
+            .team-member-contact .contact-btn span {
+                display: none;
+            }
+            
+            .team-member-contact .contact-btn i {
+                font-size: 1.1rem;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header class="carlton-header">
+        <nav class="carlton-navbar">
+            <div class="navbar-container">
+                <!-- Carlton Logo -->
+                <div class="navbar-brand">
+                    <a href="https://icarlton.com">
+                        <img src="https://listings.icarlton.com/uploads/enhanced_header_footer_files/header_logo.png" alt="Carlton Real Estate" class="logo">
+                    </a>
+                </div>
+                
+                <!-- Mobile Hamburger Button -->
+                <button class="navbar-hamburger" id="navbar-hamburger" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <!-- Navigation Menu -->
+                <div class="navbar-menu" id="navbar-menu">
+                    <a href="https://icarlton.com" class="nav-item">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    <a href="index.html" class="nav-item">
+                        <i class="fas fa-search"></i>
+                        <span>Search</span>
+                    </a>
+                    <a href="properties.html" class="nav-item">
+                        <i class="fas fa-th-large"></i>
+                        <span>Properties</span>
+                    </a>
+                    <a href="team.html" class="nav-item active">
+                        <i class="fas fa-users"></i>
+                        <span>Team</span>
+                    </a>
+                    <a href="contact.html" class="nav-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>Contact</span>
+                    </a>
+                </div>
+                
+                <!-- Actions -->
+                <div class="navbar-actions">
+                    <button class="language-btn">
+                        <i class="fas fa-globe"></i>
+                        <span>EN</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <a href="login.html" class="login-btn">
+                        <i class="fas fa-user"></i>
+                        <span>Login</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Team Hero -->
+    <section class="team-hero">
+        <div class="container">
+            <h1>Meet Our Expert Team</h1>
+            <p>Dedicated professionals committed to finding your perfect property</p>
+        </div>
+    </section>
+
+    <!-- Team Members -->
+    <main class="main-content">
+        <div class="container">
+            <div class="team-grid">
+                <!-- Abdulla Hasan -->
+                <div class="team-member">
+                    <img src="https://listings.icarlton.com/uploads/team_members/abdulla-hasan.jpg" alt="Abdulla Hasan" class="team-member-image">
+                    <div class="team-member-info">
+                        <h3 class="team-member-name">Abdulla Hasan</h3>
+                        <p class="team-member-role">Property Consultant</p>
+                        <div class="team-member-contact">
+                            <a href="tel:+97332319900" class="contact-btn">
+                                <i class="fas fa-phone"></i> <span>Call</span>
+                            </a>
+                            <a href="https://wa.me/97332319900" class="contact-btn">
+                                <i class="fab fa-whatsapp"></i> <span>WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ahmed Al-A'ali -->
+                <div class="team-member">
+                    <img src="https://listings.icarlton.com/uploads/team_members/ahmed-al-aali.jpg" alt="Ahmed Al-A'ali" class="team-member-image">
+                    <div class="team-member-info">
+                        <h3 class="team-member-name">Ahmed Al-A'ali</h3>
+                        <p class="team-member-role">Property Consultant</p>
+                        <div class="team-member-contact">
+                            <a href="tel:+97336943000" class="contact-btn">
+                                <i class="fas fa-phone"></i> <span>Call</span>
+                            </a>
+                            <a href="https://wa.me/97336943000" class="contact-btn">
+                                <i class="fab fa-whatsapp"></i> <span>WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ali Hasan -->
+                <div class="team-member">
+                    <img src="https://listings.icarlton.com/uploads/team_members/ali-hasan.jpg" alt="Ali Hasan" class="team-member-image">
+                    <div class="team-member-info">
+                        <h3 class="team-member-name">Ali Hasan</h3>
+                        <p class="team-member-role">Property Consultant</p>
+                        <div class="team-member-contact">
+                            <a href="tel:+97338213300" class="contact-btn">
+                                <i class="fas fa-phone"></i> <span>Call</span>
+                            </a>
+                            <a href="https://wa.me/97338213300" class="contact-btn">
+                                <i class="fab fa-whatsapp"></i> <span>WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hanaa Adel -->
+                <div class="team-member">
+                    <img src="https://listings.icarlton.com/uploads/team_members/hanaa-adel.jpg" alt="Hanaa Adel" class="team-member-image">
+                    <div class="team-member-info">
+                        <h3 class="team-member-name">Hanaa Adel</h3>
+                        <p class="team-member-role">Property Advisor</p>
+                        <div class="team-member-contact">
+                            <a href="tel:+97336504411" class="contact-btn">
+                                <i class="fas fa-phone"></i> <span>Call</span>
+                            </a>
+                            <a href="https://wa.me/97336504411" class="contact-btn">
+                                <i class="fab fa-whatsapp"></i> <span>WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hesham Ismaeel -->
+                <div class="team-member">
+                    <img src="https://listings.icarlton.com/uploads/team_members/hesham-ismaeel.jpg" alt="Hesham Ismaeel" class="team-member-image">
+                    <div class="team-member-info">
+                        <h3 class="team-member-name">Hesham Ismaeel</h3>
+                        <p class="team-member-role">Property Consultant</p>
+                        <div class="team-member-contact">
+                            <a href="tel:+97336503399" class="contact-btn">
+                                <i class="fas fa-phone"></i> <span>Call</span>
+                            </a>
+                            <a href="https://wa.me/97336503399" class="contact-btn">
+                                <i class="fab fa-whatsapp"></i> <span>WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Husain Mansoor -->
+                <div class="team-member">
+                    <img src="https://listings.icarlton.com/uploads/team_members/husain-mansoor.jpg" alt="Husain Mansoor" class="team-member-image">
+                    <div class="team-member-info">
+                        <h3 class="team-member-name">Husain Mansoor</h3>
+                        <p class="team-member-role">Property Consultant</p>
+                        <div class="team-member-contact">
+                            <a href="tel:+97338216600" class="contact-btn">
+                                <i class="fas fa-phone"></i> <span>Call</span>
+                            </a>
+                            <a href="https://wa.me/97338216600" class="contact-btn">
+                                <i class="fab fa-whatsapp"></i> <span>WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mirna Kamal -->
+                <div class="team-member">
+                    <img src="https://listings.icarlton.com/uploads/team_members/mirna-kamal.jpg" alt="Mirna Kamal" class="team-member-image">
+                    <div class="team-member-info">
+                        <h3 class="team-member-name">Mirna Kamal</h3>
+                        <p class="team-member-role">Property Advisor</p>
+                        <div class="team-member-contact">
+                            <a href="tel:+97336960222" class="contact-btn">
+                                <i class="fas fa-phone"></i> <span>Call</span>
+                            </a>
+                            <a href="https://wa.me/97336960222" class="contact-btn">
+                                <i class="fab fa-whatsapp"></i> <span>WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mohamed Abdulla -->
+                <div class="team-member">
+                    <img src="https://listings.icarlton.com/uploads/team_members/mohamed-abdulla.jpg" alt="Mohamed Abdulla" class="team-member-image">
+                    <div class="team-member-info">
+                        <h3 class="team-member-name">Mohamed Abdulla</h3>
+                        <p class="team-member-role">Property Consultant</p>
+                        <div class="team-member-contact">
+                            <a href="tel:+97336744755" class="contact-btn">
+                                <i class="fas fa-phone"></i> <span>Call</span>
+                            </a>
+                            <a href="https://wa.me/97336744755" class="contact-btn">
+                                <i class="fab fa-whatsapp"></i> <span>WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Safa Almunsef -->
+                <div class="team-member">
+                    <img src="https://listings.icarlton.com/uploads/team_members/safa-almunsef.jpg" alt="Safa Almunsef" class="team-member-image">
+                    <div class="team-member-info">
+                        <h3 class="team-member-name">Safa Almunsef</h3>
+                        <p class="team-member-role">Property Advisor</p>
+                        <div class="team-member-contact">
+                            <a href="tel:+97336503344" class="contact-btn">
+                                <i class="fas fa-phone"></i> <span>Call</span>
+                            </a>
+                            <a href="https://wa.me/97336503344" class="contact-btn">
+                                <i class="fab fa-whatsapp"></i> <span>WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sara Ali -->
+                <div class="team-member">
+                    <img src="https://listings.icarlton.com/uploads/team_members/sara-ali.jpg" alt="Sara Ali" class="team-member-image">
+                    <div class="team-member-info">
+                        <h3 class="team-member-name">Sara Ali</h3>
+                        <p class="team-member-role">Property Consultant</p>
+                        <div class="team-member-contact">
+                            <a href="tel:+97336503388" class="contact-btn">
+                                <i class="fas fa-phone"></i> <span>Call</span>
+                            </a>
+                            <a href="https://wa.me/97336503388" class="contact-btn">
+                                <i class="fab fa-whatsapp"></i> <span>WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Violeta Abboud -->
+                <div class="team-member">
+                    <img src="https://listings.icarlton.com/uploads/team_members/violeta-abboud.jpg" alt="Violeta Abboud" class="team-member-image">
+                    <div class="team-member-info">
+                        <h3 class="team-member-name">Violeta Abboud</h3>
+                        <p class="team-member-role">Key Account Manager</p>
+                        <div class="team-member-contact">
+                            <a href="tel:+97336504477" class="contact-btn">
+                                <i class="fas fa-phone"></i> <span>Call</span>
+                            </a>
+                            <a href="https://wa.me/97336504477" class="contact-btn">
+                                <i class="fab fa-whatsapp"></i> <span>WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Yasmin Al Halfawy -->
+                <div class="team-member">
+                    <img src="https://listings.icarlton.com/uploads/team_members/yasmin-al-halfawy.jpg" alt="Yasmin Al Halfawy" class="team-member-image">
+                    <div class="team-member-info">
+                        <h3 class="team-member-name">Yasmin Al Halfawy</h3>
+                        <p class="team-member-role">Key Account Manager</p>
+                        <div class="team-member-contact">
+                            <a href="tel:+97336160222" class="contact-btn">
+                                <i class="fas fa-phone"></i> <span>Call</span>
+                            </a>
+                            <a href="https://wa.me/97336160222" class="contact-btn">
+                                <i class="fab fa-whatsapp"></i> <span>WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Carlton Footer -->
+    <footer class="carlton-footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <div class="footer-logo">
+                        <img src="https://listings.icarlton.com/uploads/enhanced_header_footer_files/da32d6eb1043a2de433746961b49d405.png" alt="Carlton Real Estate">
+                    </div>
+                    <div class="footer-copyright">
+                        <i class="far fa-copyright"></i>
+                        <span>2025 Copyright Carlton Real Estate.</span>
+                    </div>
+                </div>
+                
+                <div class="footer-right">
+                    <div class="social-links">
+                        <a href="https://icarlton.com/" target="_blank" class="social-link"><i class="fas fa-globe"></i></a>
+                        <a href="tel:+97317292827" class="social-link"><i class="fas fa-phone"></i></a>
+                        <a href="https://wa.me/97317292827" target="_blank" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        <a href="mailto:info@icarlton.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                        <a href="https://www.facebook.com/CarltonBahrain" target="_blank" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/carltonbahrain/" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="https://twitter.com/CarltonBahrain" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.youtube.com/channel/UChbYG6P05gcSTN8ZABF0sAQ" target="_blank" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.linkedin.com/company/icarltonbahrain/" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://maps.app.goo.gl/CeJ7HxG4fKNtmswd7" target="_blank" class="social-link"><i class="fas fa-location-dot"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+    
+    <script>
+        // Fallback for team member images
+        document.addEventListener('DOMContentLoaded', function() {
+            const teamImages = document.querySelectorAll('.team-member-image');
+            teamImages.forEach(img => {
+                img.onerror = function() {
+                    // Extract name from alt attribute
+                    const name = this.alt || 'Team Member';
+                    const initials = name.split(' ').map(n => n[0]).join('');
+                    // Use UI Avatars as fallback
+                    this.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&size=400&background=0F1A2E&color=FFE000&bold=true&format=png`;
+                    console.warn(`Failed to load image for ${name}, using fallback`);
+                };
+            });
+        });
+    </script>
+</body>
+</html>

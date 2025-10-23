@@ -1,0 +1,94 @@
+{
+  "displayName": "Carlton Bahrain Style - Google Cloud",
+  "variant": "light",
+  "backgroundColor": "#d6d6d6",
+  "styles": [
+    {
+      "id": "infrastructure",
+      "geometry": {
+        "visible": true
+      }
+    },
+    {
+      "id": "infrastructure.businessCorridor",
+      "geometry": {
+        "visible": false
+      }
+    },
+    {
+      "id": "pointOfInterest",
+      "geometry": {
+        "visible": true
+      },
+      "label": {
+        "visible": true,
+        "pinFillColor": "#0a2b4a",
+        "textFillOpacity": 1,
+        "textFillColor": "#000000"
+      }
+    },
+    {
+      "id": "pointOfInterest.emergency.hospital",
+      "label": {
+        "pinFillColor": "#ff2600"
+      }
+    },
+    {
+      "id": "pointOfInterest.entertainment.themePark",
+      "label": {
+        "visible": false
+      }
+    },
+    {
+      "id": "pointOfInterest.foodAndDrink.restaurant",
+      "label": {
+        "visible": false
+      }
+    },
+    {
+      "id": "pointOfInterest.other.cemetery",
+      "geometry": {
+        "visible": false
+      },
+      "label": {
+        "visible": false
+      }
+    },
+    {
+      "id": "pointOfInterest.other.placeOfWorship",
+      "label": {
+        "visible": false
+      }
+    },
+    {
+      "id": "pointOfInterest.other.school",
+      "label": {
+        "visible": true,
+        "pinFillColor": "#c0c0c0"
+      }
+    },
+    {
+      "id": "pointOfInterest.retail.shopping",
+      "label": {
+        "visible": true
+      }
+    },
+    {
+      "id": "political",
+      "geometry": {
+        "visible": true,
+        "fillColor": "#929292"
+      },
+      "label": {
+        "visible": true,
+        "pinFillColor": "#000000"
+      }
+    },
+    {
+      "id": "political.countryOrRegion",
+      "label": {
+        "visible": false
+      }
+    }
+  ]
+}

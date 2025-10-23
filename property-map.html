@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Map - Carlton Real Estate</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Maps API with Map ID for custom styling -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJBxx-ZBE46bsmHmJ6AH3zwlgqwAqrQ9w&libraries=places&map_ids=14297571e8d2209a625ab170&callback=initMap" 
+            onerror="console.error('Failed to load Google Maps API. Please check your API key and internet connection.')"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <!-- Property details styles (for popup modal) -->
+    <link rel="stylesheet" href="css/property-details.css">
+    
+    <!-- Property Map Specific Styles - Single Column Layout -->
+    <style>
+        /* Override property list to display in single column (only for property-map.html) */
+        .property-sidebar .property-list {
+            display: flex !important;
+            flex-direction: column !important;
+            flex-wrap: nowrap !important;
+            gap: 1rem !important;
+            overflow-x: visible !important;
+            overflow-y: visible !important;
+        }
+        
+        /* Make each property card full width in single column */
+        .property-sidebar .property-list > .property-card,
+        .property-sidebar .property-list > a {
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: unset !important;
+            flex: none !important;
+        }
+        
+        /* Ensure property cards don't shrink or grow */
+        .property-sidebar .property-card {
+            flex-shrink: 0 !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header class="carlton-header">
+        <nav class="carlton-navbar">
+            <div class="navbar-container">
+                <!-- Carlton Logo -->
+                <div class="navbar-brand">
+                    <a href="#">
+                        <img src="https://listings.icarlton.com/uploads/enhanced_header_footer_files/header_logo.png" alt="Carlton Real Estate" class="logo">
+                    </a>
+                </div>
+                
+                <!-- Mobile Hamburger Button -->
+                <button class="navbar-hamburger" id="navbar-hamburger" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <!-- Navigation Menu -->
+                                <!-- Navigation Menu -->
+                <div class="navbar-menu" id="navbar-menu">
+                    <a href="https://icarlton.com" class="nav-item">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    <a href="index.html" class="nav-item active">
+                        <i class="fas fa-search"></i>
+                        <span>Search</span>
+                    </a>
+                    <a href="properties.html" class="nav-item">
+                        <i class="fas fa-th-large"></i>
+                        <span>Properties</span>
+                    </a>
+                    <a href="team.html" class="nav-item">
+                        <i class="fas fa-users"></i>
+                        <span>Team</span>
+                    </a>
+                    <a href="contact.html" class="nav-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>Contact</span>
+                    </a>
+                </div>
+                
+                <!-- Actions -->
+                <div class="navbar-actions">
+                    <button class="language-btn">
+                        <i class="fas fa-globe"></i>
+                        <span>EN</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <a href="login.html" class="login-btn">
+                        <i class="fas fa-user"></i>
+                        <span>Login</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="map-layout">
+            <!-- Property Search & Filter Sidebar -->
+            <div class="property-sidebar">
+                <!-- Search Header -->
+                <div class="sidebar-header">
+                    <div class="search-header">
+                        <h2><i class="fas fa-search"></i> Property Search</h2>
+                        <p>Find your perfect property in Bahrain</p>
+                    </div>
+                </div>
+                
+                <!-- Quick Search -->
+                <div class="quick-search">
+                    <div class="search-input-group">
+                        <input type="text" id="property-search" placeholder="Search by location, property type...">
+                        <button class="search-btn"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+                
+                <!-- Primary Filters -->
+                <div class="primary-filters">
+                    <div class="filter-group">
+                        <label class="filter-label"><i class="fas fa-map-marker-alt"></i> Location</label>
+                        <select id="map-location" class="filter-select">
+                            <option value="all">All Areas</option>
+                            <!-- Locations will be populated by locations-data.js -->
+                        </select>
+                    </div>
+                    
+                    <div class="filter-row">
+                        <div class="filter-group half">
+                            <label class="filter-label"><i class="fas fa-layer-group"></i> Category</label>
+                            <select id="category-filter" class="filter-select">
+                                <option value="all">All Categories</option>
+                                <option value="residential">Residential</option>
+                                <option value="commercial">Commercial</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group half">
+                            <label class="filter-label"><i class="fas fa-home"></i> Type</label>
+                            <select id="property-type-filter" class="filter-select">
+                                <option value="all">All Types</option>
+                                <option value="apartment">Apartment</option>
+                                <option value="villa">Villa</option>
+                                <option value="factory">Factory</option>
+                                <option value="medical">Medical Facility</option>
+                                <option value="land">Land</option>
+                                <option value="building">Building</option>
+                                <option value="office">Office</option>
+                                <option value="shop">Shop</option>
+                                <option value="store">Store</option>
+                                <option value="compound">Compound</option>
+                                <option value="land-planing">Land Planing</option>
+                                <option value="farm">Farm</option>
+                                <option value="project">Project</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-row">
+                        <div class="filter-group half">
+                            <label class="filter-label"><i class="fas fa-tag"></i> For</label>
+                            <select id="listing-type-filter" class="filter-select">
+                                <option value="all">All</option>
+                                <option value="rent">Rent</option>
+                                <option value="sale">Sale</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Price Range -->
+                    <div class="filter-group">
+                        <label class="filter-label"><i class="fas fa-money-bill-wave"></i> Price Range (BHD)</label>
+                        <div class="price-inputs">
+                            <input type="number" id="min-price" placeholder="Min" min="0">
+                            <span class="price-separator">-</span>
+                            <input type="number" id="max-price" placeholder="Max" min="0">
+                        </div>
+                        <div class="price-slider-container">
+                            <input type="range" id="price-slider" min="0" max="5000" value="5000" class="price-slider">
+                            <div class="price-range-display">
+                                <span id="price-range-text">BHD 0 - 5000+</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Bedrooms & Bathrooms -->
+                    <div class="filter-row">
+                        <div class="filter-group half" id="bedrooms-filter-group">
+                            <label class="filter-label"><i class="fas fa-bed"></i> Bedrooms</label>
+                            <select id="bedrooms-filter" class="filter-select">
+                                <option value="all">Any</option>
+                                <option value="1">1+</option>
+                                <option value="2">2+</option>
+                                <option value="3">3+</option>
+                                <option value="4">4+</option>
+                                <option value="5">5+</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group half">
+                            <label class="filter-label"><i class="fas fa-bath"></i> Bathrooms</label>
+                            <select id="bathrooms-filter" class="filter-select">
+                                <option value="all">Any</option>
+                                <option value="1">1+</option>
+                                <option value="2">2+</option>
+                                <option value="3">3+</option>
+                                <option value="4">4+</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Map Display Options -->
+                <div class="filter-section">
+                    <h4><i class="fas fa-eye"></i> Show Amenities on Map</h4>
+                    <div class="toggle-grid">
+                        <label class="toggle-item">
+                            <input type="checkbox" id="show-hospitals" checked>
+                            <span class="toggle-visual hospital"></span>
+                            <span class="toggle-text">Hospitals</span>
+                        </label>
+                        <label class="toggle-item">
+                            <input type="checkbox" id="show-schools" checked>
+                            <span class="toggle-visual school"></span>
+                            <span class="toggle-text">Schools</span>
+                        </label>
+                    </div>
+                    <div class="filter-note">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Properties are shown based on your search and filter criteria above</span>
+                    </div>
+                </div>
+                
+                <!-- Advanced Filters (Collapsible) -->
+                <div class="advanced-section">
+                    <button class="section-toggle" id="advanced-toggle">
+                        <i class="fas fa-sliders-h"></i> Advanced Filters
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </button>
+                    
+                    <div class="collapsible-content" id="advanced-content">
+                        <!-- Size From/To (m²) -->
+                        <div class="filter-row">
+                            <div class="filter-group half">
+                                <label class="filter-label" id="size-from-label">Size From (m²)</label>
+                                <input type="number" id="adv-size-from" placeholder="0" min="0">
+                            </div>
+                            
+                            <div class="filter-group half">
+                                <label class="filter-label" id="size-to-label">Size To (m²)</label>
+                                <input type="number" id="adv-size-to" placeholder="Any" min="0">
+                            </div>
+                        </div>
+                        
+                        <!-- No. of Roads -->
+                        <div class="filter-group">
+                            <label class="filter-label">No. of Roads</label>
+                            <select id="adv-roads" class="filter-select">
+                                <option value="">Select</option>
+                                <option value="1">1 Road</option>
+                                <option value="2">2 Roads</option>
+                                <option value="3">3 Roads</option>
+                                <option value="4">4 Roads</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Size (ft²) Toggle -->
+                        <div class="filter-group" style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: rgba(255, 255, 255, 0.6); border: 2px solid rgba(15, 26, 46, 0.08); border-radius: 10px;">
+                            <label class="filter-label" style="margin: 0; font-weight: 600; color: var(--carlton-primary);">Size Converter (m²) to (ft²)</label>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="size-ft-toggle">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        
+                        <!-- Facilities -->
+                        <div class="filter-group">
+                            <label class="filter-label">Facilities</label>
+                            <div class="checkbox-grid">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="facility-parking" value="parking">
+                                    <span class="checkbox-mark"></span>
+                                    <span class="checkbox-label">Parking</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="facility-pool" value="pool">
+                                    <span class="checkbox-mark"></span>
+                                    <span class="checkbox-label">Swimming Pool</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="facility-gym" value="gym">
+                                    <span class="checkbox-mark"></span>
+                                    <span class="checkbox-label">Gym</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="facility-security" value="security">
+                                    <span class="checkbox-mark"></span>
+                                    <span class="checkbox-label">24/7 Security</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="facility-elevator" value="elevator">
+                                    <span class="checkbox-mark"></span>
+                                    <span class="checkbox-label">Elevator</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="facility-garden" value="garden">
+                                    <span class="checkbox-mark"></span>
+                                    <span class="checkbox-label">Garden</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="facility-balcony" value="balcony">
+                                    <span class="checkbox-mark"></span>
+                                    <span class="checkbox-label">Balcony</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Amenities Quick Access -->
+                <div class="amenities-quick-access">
+                    <button class="section-toggle" id="amenities-toggle">
+                        <i class="fas fa-hospital"></i> Nearby Amenities
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </button>
+                    
+                    <div class="collapsible-content" id="amenities-content">
+                        <!-- Quick Amenity Links -->
+                        <div class="amenity-quick-links">
+                            <div class="amenity-category-tabs">
+                                <button class="amenity-tab active" data-category="hospitals">
+                                    <i class="fas fa-hospital"></i> Hospitals
+                                </button>
+                                <button class="amenity-tab" data-category="schools">
+                                    <i class="fas fa-school"></i> Schools
+                                </button>
+                            </div>
+                            
+                            <!-- Hospitals List -->
+                            <div class="amenity-tab-content active" id="hospitals-content">
+                                <div class="amenity-type-section">
+                                    <h6>Public Hospitals</h6>
+                                    <div class="amenity-items">
+                                        <div class="amenity-item" data-type="hospital">
+                                            <span class="amenity-name">Salmaniya Medical Complex</span>
+                                            <span class="amenity-badge public">Public</span>
+                                        </div>
+                                        <div class="amenity-item" data-type="hospital">
+                                            <span class="amenity-name">King Hamad University Hospital</span>
+                                            <span class="amenity-badge public">Public</span>
+                                        </div>
+                                        <div class="amenity-item" data-type="hospital">
+                                            <span class="amenity-name">Bahrain Defense Force Hospital</span>
+                                            <span class="amenity-badge public">Military</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="amenity-type-section">
+                                    <h6>Private Hospitals</h6>
+                                    <div class="amenity-items">
+                                        <div class="amenity-item" data-type="hospital">
+                                            <span class="amenity-name">Royal Bahrain Hospital</span>
+                                            <span class="amenity-badge private">Private</span>
+                                        </div>
+                                        <div class="amenity-item" data-type="hospital">
+                                            <span class="amenity-name">Bahrain Specialist Hospital</span>
+                                            <span class="amenity-badge private">Private</span>
+                                        </div>
+                                        <div class="amenity-item" data-type="hospital">
+                                            <span class="amenity-name">American Mission Hospital</span>
+                                            <span class="amenity-badge private">Private</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Schools List -->
+                            <div class="amenity-tab-content" id="schools-content">
+                                <div class="amenity-type-section">
+                                    <h6>Public Schools</h6>
+                                    <div class="amenity-items">
+                                        <div class="amenity-item" data-type="school">
+                                            <span class="amenity-name">University of Bahrain</span>
+                                            <span class="amenity-badge public">Public</span>
+                                        </div>
+                                        <div class="amenity-item" data-type="school">
+                                            <span class="amenity-name">Manama Secondary School</span>
+                                            <span class="amenity-badge public">Public</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="amenity-type-section">
+                                    <h6>Private/International Schools</h6>
+                                    <div class="amenity-items">
+                                        <div class="amenity-item" data-type="school">
+                                            <span class="amenity-name">British School of Bahrain</span>
+                                            <span class="amenity-badge private">Private</span>
+                                        </div>
+                                        <div class="amenity-item" data-type="school">
+                                            <span class="amenity-name">American School of Bahrain</span>
+                                            <span class="amenity-badge private">Private</span>
+                                        </div>
+                                        <div class="amenity-item" data-type="school">
+                                            <span class="amenity-name">Indian School Bahrain</span>
+                                            <span class="amenity-badge private">Private</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Filter Actions -->
+                    <div class="filter-actions">
+                    <button class="btn-clear" id="clear-filters">
+                        <i class="fas fa-times"></i> Clear All
+                    </button>
+                    <button class="btn-apply" id="apply-filters">
+                        <i class="fas fa-search"></i> Search Properties
+                    </button>
+                </div>                <!-- Property Results -->
+                <div class="results-section">
+                    <div class="results-header">
+                        <div class="results-info">
+                            <span class="property-count" id="property-count">Loading properties...</span>
+                            <span class="results-location" id="results-location">All Areas</span>
+                        </div>
+                        <div class="sort-controls">
+                            <select id="sort-options" class="sort-select">
+                                <option value="relevance">Most Relevant</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                                <option value="newest">Newest First</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="property-list" id="property-list">
+                        <div class="loading-state">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>Loading properties and map...</p>
+                            <p style="font-size: 12px; color: #6c757d; margin-top: 8px;">If the map doesn't load, please check the Google Maps API key setup.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Map Container -->
+            <div class="map-container-full">
+                <div id="map"></div>
+                
+                <!-- Property Details Popup -->
+                <div class="property-popup" id="property-popup" style="display: none;">
+                    <div class="popup-content">
+                        <button class="popup-close" id="popup-close">&times;</button>
+                        <img class="popup-image" id="popup-image" src="property-map.html" alt="Property">
+                        <div class="popup-details">
+                            <h3 id="popup-title"></h3>
+                            <div class="popup-price" id="popup-price"></div>
+                            <div class="popup-specs" id="popup-specs"></div>
+                            <p class="popup-description" id="popup-description"></p>
+                            <div class="popup-actions">
+                                <button class="btn btn-primary" id="popup-mortgage-btn">Calculate Mortgage</button>
+                                <button class="btn btn-outline" id="popup-details-btn">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="carlton-footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <!-- Left: Logo and Copyright -->
+                <div class="footer-left">
+                    <div class="footer-logo">
+                        <img src="https://listings.icarlton.com/uploads/enhanced_header_footer_files/da32d6eb1043a2de433746961b49d405.png" alt="Carlton Real Estate">
+                    </div>
+                    <div class="footer-copyright">
+                        <i class="far fa-copyright"></i>
+                        <span>2025 Copyright Carlton Real Estate.</span>
+                    </div>
+                </div>
+                
+                <!-- Right: Social Links -->
+                <div class="footer-right">
+                    <div class="social-links">
+                        <a href="https://icarlton.com/" target="_blank" class="social-link">
+                            <i class="fas fa-globe"></i>
+                        </a>
+                        <a href="tel:+97317292827" class="social-link">
+                            <i class="fas fa-phone"></i>
+                        </a>
+                        <a href="https://wa.me/97317292827" target="_blank" class="social-link">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="mailto:info@icarlton.com" class="social-link">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://www.facebook.com/CarltonBahrain" target="_blank" class="social-link">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://www.instagram.com/carltonbahrain/" target="_blank" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://twitter.com/CarltonBahrain" target="_blank" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.youtube.com/channel/UChbYG6P05gcSTN8ZABF0sAQ" target="_blank" class="social-link">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/company/icarltonbahrain/" target="_blank" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://maps.app.goo.gl/CeJ7HxG4fKNtmswd7" target="_blank" class="social-link">
+                            <i class="fas fa-location-dot"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Global error handler for Google Maps
+        window.gm_authFailure = function() {
+            console.error('Google Maps authentication failed. Please check your API key.');
+            showMapError('Google Maps Setup Required', 'Please add your Google Maps API key to enable the map functionality.', 'See GOOGLE_MAPS_SETUP.md for detailed instructions.');
+        };
+        
+        // Function to show map error
+        function showMapError(title, message, details) {
+            const mapElement = document.getElementById('map');
+            if (mapElement) {
+                mapElement.innerHTML = `
+                    <div style="display: flex; align-items: center; justify-content: center; height: 100%; background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);">
+                        <div style="padding: 40px; text-align: center; background: rgba(255, 255, 255, 0.95); border: 2px dashed rgba(15, 26, 46, 0.2); border-radius: 16px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); max-width: 400px;">
+                            <i class="fas fa-exclamation-triangle" style="font-size: 48px; color: #ffc107; margin-bottom: 16px;"></i>
+                            <h3 style="color: #495057; margin-bottom: 12px; font-family: 'Inter', sans-serif;">${title}</h3>
+                            <p style="color: #6c757d; margin-bottom: 16px; line-height: 1.5;">${message}</p>
+                            ${details ? `<p style="color: #6c757d; font-size: 14px; margin-bottom: 20px;">${details}</p>` : ''}
+                            <button onclick="location.reload()" style="background: linear-gradient(135deg, #0F1A2E, #FFE000); color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: transform 0.2s ease;">
+                                Retry Loading
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+        
+        // Fallback if Google Maps fails to load
+        window.setTimeout(function() {
+            if (typeof google === 'undefined' || typeof initMap === 'undefined') {
+                console.warn('Google Maps failed to load, showing fallback message');
+                showMapError('Map Loading Issue', 'Please check your internet connection and API key configuration.', 'Make sure the Google Maps API key is valid and has the necessary permissions.');
+            }
+        }, 5000);
+        
+        // Initialize map when everything is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update property count and loading state
+            const propertyCountElement = document.getElementById('property-count');
+            const propertyListElement = document.getElementById('property-list');
+            
+            if (propertyCountElement) {
+                propertyCountElement.textContent = 'Loading properties...';
+            }
+            
+            // Set up basic interactivity even without Google Maps
+            if (propertyListElement) {
+                setTimeout(function() {
+                    if (typeof google === 'undefined') {
+                        propertyListElement.innerHTML = `
+                            <div style="padding: 20px; text-align: center; background: rgba(255, 255, 255, 0.9); border-radius: 12px; border: 1px solid rgba(15, 26, 46, 0.1);">
+                                <i class="fas fa-info-circle" style="font-size: 24px; color: #6366f1; margin-bottom: 12px;"></i>
+                                <h4 style="color: #374151; margin-bottom: 8px;">Map Setup Required</h4>
+                                <p style="color: #6b7280; font-size: 14px;">Configure Google Maps API to view properties on the map.</p>
+                            </div>
+                        `;
+                        if (propertyCountElement) {
+                            propertyCountElement.textContent = 'Map setup required';
+                        }
+                    } else {
+                        if (propertyCountElement) {
+                            propertyCountElement.textContent = '4 properties found';
+                        }
+                    }
+                }, 3000);
+            }
+        });
+    </script>
+
+    <!-- Carlton API (must load first) -->
+    <script src="../api-config.js"></script>
+    <script src="js/carlton-api.js"></script>
+    <script src="js/locations-data.js"></script>
+    <script src="js/area-mapping.js"></script>
+    <script src="js/script.js"></script>
+    <!-- Property details modal manager (reused from property-details.html) -->
+    <script src="js/property-details.js"></script>
+    <script src="js/property-map-google.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "carlton-listing",
+  "version": "1.0.0",
+  "description": "Carlton Real Estate Property Listings",
+  "main": "index.js",
+  "scripts": {
+    "start": "node backend/index.js"
+  },
+  "keywords": [
+    "real-estate",
+    "property",
+    "listings",
+    "map"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  }
+}
