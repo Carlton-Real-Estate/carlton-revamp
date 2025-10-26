@@ -121,22 +121,32 @@ class CarltonChatbot {
         });
 
         // Send message functionality
-        this.elements.send?.addEventListener('click', () => this.sendMessage());
+        this.elements.send?.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            this.sendMessage();
+            return false;
+        });
         this.elements.input?.addEventListener('keypress', (e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
+                e.stopPropagation();
                 this.sendMessage();
+                return false;
             }
         });
 
         // Suggestion buttons
         document.addEventListener('click', (e) => {
             if (e.target.classList.contains('suggestion-btn')) {
+                e.preventDefault();
+                e.stopPropagation();
                 const text = e.target.getAttribute('data-text');
                 if (text) {
                     this.elements.input.value = text;
                     this.sendMessage();
                 }
+                return false;
             }
         });
 
