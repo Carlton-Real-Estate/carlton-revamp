@@ -107,8 +107,18 @@ class CarltonChatbot {
 
     setupEventListeners() {
         // Toggle chatbot window
-        this.elements.toggle?.addEventListener('click', () => this.toggleChat());
-        this.elements.minimize?.addEventListener('click', () => this.closeChat());
+        this.elements.toggle?.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            this.toggleChat();
+            return false;
+        });
+        this.elements.minimize?.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            this.closeChat();
+            return false;
+        });
 
         // Send message functionality
         this.elements.send?.addEventListener('click', () => this.sendMessage());
@@ -176,9 +186,15 @@ class CarltonChatbot {
         } else {
             this.openChat();
         }
+        return false; // Prevent any default action
     }
 
     async openChat() {
+        if (!this.elements.window) {
+            console.warn('⚠️ Chatbot window element not found');
+            return;
+        }
+        
         this.elements.window.classList.add('active');
         this.isOpen = true;
 
@@ -194,6 +210,8 @@ class CarltonChatbot {
     }
 
     closeChat() {
+        if (!this.elements.window) return;
+        
         this.elements.window.classList.remove('active');
         this.isOpen = false;
     }

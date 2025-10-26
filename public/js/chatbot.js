@@ -107,8 +107,18 @@ class CarltonChatbot {
 
     setupEventListeners() {
         // Toggle chatbot window
-        this.elements.toggle?.addEventListener('click', () => this.toggleChat());
-        this.elements.minimize?.addEventListener('click', () => this.closeChat());
+        this.elements.toggle?.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            this.toggleChat();
+            return false;
+        });
+        this.elements.minimize?.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            this.closeChat();
+            return false;
+        });
 
         // Send message functionality
         this.elements.send?.addEventListener('click', () => this.sendMessage());
@@ -176,9 +186,15 @@ class CarltonChatbot {
         } else {
             this.openChat();
         }
+        return false; // Prevent any default action
     }
 
     async openChat() {
+        if (!this.elements.window) {
+            console.warn('⚠️ Chatbot window element not found');
+            return;
+        }
+        
         this.elements.window.classList.add('active');
         this.isOpen = true;
 
@@ -194,11 +210,19 @@ class CarltonChatbot {
     }
 
     closeChat() {
+        if (!this.elements.window) return;
+        
         this.elements.window.classList.remove('active');
         this.isOpen = false;
     }
 
     async initializeSession() {
+        // Check if required elements exist before initializing session
+        if (!this.elements.messages || !this.elements.actions) {
+            console.warn('⚠️ Chatbot elements not found, skipping session initialization');
+            return;
+        }
+        
         try {
             const response = await fetch(`${this.API_BASE}/greeting`, {
                 method: 'POST',
@@ -289,6 +313,8 @@ class CarltonChatbot {
     }
 
     addUserMessage(message) {
+        if (!this.elements.messages) return;
+        
         const messageDiv = document.createElement('div');
         messageDiv.className = 'message user-message';
         messageDiv.innerHTML = `
@@ -305,6 +331,8 @@ class CarltonChatbot {
     }
 
     addBotMessage(message) {
+        if (!this.elements.messages) return;
+        
         const messageDiv = document.createElement('div');
         messageDiv.className = 'message bot-message';
         
@@ -353,13 +381,17 @@ class CarltonChatbot {
             buttonsContainer.appendChild(btn);
         });
 
-        this.elements.actions.innerHTML = '';
-        this.elements.actions.appendChild(buttonsContainer);
+        if (this.elements.actions) {
+            this.elements.actions.innerHTML = '';
+            this.elements.actions.appendChild(buttonsContainer);
+        }
     }
 
     displayProperties(properties) {
         if (!properties || properties.length === 0) {
-            this.elements.properties.innerHTML = '';
+            if (this.elements.properties) {
+                this.elements.properties.innerHTML = '';
+            }
             return;
         }
 
@@ -371,8 +403,10 @@ class CarltonChatbot {
             propertiesContainer.appendChild(propertyCard);
         });
 
-        this.elements.properties.innerHTML = '';
-        this.elements.properties.appendChild(propertiesContainer);
+        if (this.elements.properties) {
+            this.elements.properties.innerHTML = '';
+            this.elements.properties.appendChild(propertiesContainer);
+        }
     }
 
     createPropertyCard(property) {
@@ -501,6 +535,8 @@ class CarltonChatbot {
     }
 
     showTypingIndicator() {
+        if (!this.elements.messages) return;
+        
         const indicator = document.createElement('div');
         indicator.className = 'typing-indicator';
         indicator.innerHTML = `
@@ -519,6 +555,8 @@ class CarltonChatbot {
     }
 
     hideTypingIndicator() {
+        if (!this.elements.messages) return;
+        
         const indicator = this.elements.messages.querySelector('.typing-indicator');
         if (indicator) {
             indicator.remove();
@@ -526,13 +564,17 @@ class CarltonChatbot {
     }
 
     clearMessages() {
-        this.elements.messages.innerHTML = '';
+        if (this.elements.messages) {
+            this.elements.messages.innerHTML = '';
+        }
     }
 
     scrollToBottom() {
-        setTimeout(() => {
-            this.elements.messages.scrollTop = this.elements.messages.scrollHeight;
-        }, 100);
+        if (this.elements.messages) {
+            setTimeout(() => {
+                this.elements.messages.scrollTop = this.elements.messages.scrollHeight;
+            }, 100);
+        }
     }
 
     escapeHtml(text) {
